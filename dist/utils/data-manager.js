@@ -184,6 +184,18 @@ var DataManager = /*#__PURE__*/ (function () {
 
       return value;
     });
+    (0, _defineProperty2.default)(this, "checkIfArrayElementExist", function (
+      rowData,
+      columnDef,
+      searchValue
+    ) {
+      rowData[columnDef.field].some(function (arrayData) {
+        return arrayData[columnDef.arrayField]
+          .toString()
+          .toUpperCase()
+          .includes(searchValue);
+      });
+    });
     (0, _defineProperty2.default)(this, "getRenderState", function () {
       if (_this.filtered === false) {
         _this.filterData();
@@ -371,6 +383,12 @@ var DataManager = /*#__PURE__*/ (function () {
                   trimmedSearchText,
                   row,
                   columnDef
+                );
+              } else if (columnDef.array !== undefined && columnDef.array) {
+                return _this.checkIfArrayElementExist(
+                  row,
+                  columnDef,
+                  trimmedSearchText
                 );
               } else if (columnDef.field) {
                 var value = _this.getFieldValue(row, columnDef);

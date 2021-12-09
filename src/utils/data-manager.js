@@ -520,6 +520,15 @@ export default class DataManager {
     return value;
   };
 
+  checkIfArrayElementExist = (rowData, columnDef, searchValue) => {
+    rowData[columnDef.field].some((arrayData) => {
+      return arrayData[columnDef.arrayField]
+        .toString()
+        .toUpperCase()
+        .includes(searchValue);
+    });
+  };
+
   isDataType(type) {
     let dataType = "normal";
 
@@ -759,6 +768,12 @@ export default class DataManager {
                 trimmedSearchText,
                 row,
                 columnDef
+              );
+            } else if (columnDef.array !== undefined && columnDef.array) {
+              return this.checkIfArrayElementExist(
+                row,
+                columnDef,
+                trimmedSearchText
               );
             } else if (columnDef.field) {
               const value = this.getFieldValue(row, columnDef);
