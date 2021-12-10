@@ -189,11 +189,11 @@ var DataManager = /*#__PURE__*/ (function () {
       columnDef,
       searchValue
     ) {
-      rowData[columnDef.field].some(function (arrayData) {
+      return rowData[columnDef.field].some(function (arrayData) {
         return arrayData[columnDef.arrayField]
           .toString()
           .toUpperCase()
-          .includes(searchValue);
+          .includes(searchValue.toUpperCase());
       });
     });
     (0, _defineProperty2.default)(this, "getRenderState", function () {

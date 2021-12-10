@@ -521,11 +521,11 @@ export default class DataManager {
   };
 
   checkIfArrayElementExist = (rowData, columnDef, searchValue) => {
-    rowData[columnDef.field].some((arrayData) => {
+    return rowData[columnDef.field].some((arrayData) => {
       return arrayData[columnDef.arrayField]
         .toString()
         .toUpperCase()
-        .includes(searchValue);
+        .includes(searchValue.toUpperCase());
     });
   };
 
